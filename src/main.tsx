@@ -1,12 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { startMockServer } from "./app/server"
-import App from './app/App.tsx'
+import { RouterProvider } from "@tanstack/react-router"
+import { router } from './app/routes/index.ts'
 
 startMockServer()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
