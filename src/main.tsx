@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { startMockServer } from "./app/server"
 import { RouterProvider } from "@tanstack/react-router"
 import { router } from './app/routes/index.ts'
+import './index.css'
 import { Theme } from '@radix-ui/themes'
 
 startMockServer()
