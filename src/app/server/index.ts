@@ -1,6 +1,6 @@
 import { createServer } from "miragejs"
 
-export function startMockServer () {
+export function startMockServer() {
   return createServer({
     routes() {
       this.namespace = "api"
@@ -9,12 +9,14 @@ export function startMockServer () {
         return { status: "ok" };
       })
 
-      this.post("/login", (_, _request) => {
-        return 1
+      this.post("/login", (_, request) => {
+        const attrs = JSON.parse(request.requestBody)
+        return attrs
       })
 
-      this.post("/signup", (_, _request) => {
-        return 1
+      this.post("/signup", (_, request) => {
+        const attrs = JSON.parse(request.requestBody)
+        return attrs
       })
 
       this.get("/quests", () => {

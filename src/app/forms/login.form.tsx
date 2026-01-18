@@ -9,8 +9,9 @@ import {
   Link,
   Box
 } from "@radix-ui/themes"
-import { signupRoute } from "../routes/signup.route"
 import { useForm } from "@tanstack/react-form"
+import { signupRoute } from "../routes/signup.route"
+import { serverConnection } from "../connections/server.connection"
 
 export const LoginForm = () => {
   const form = useForm({
@@ -18,8 +19,16 @@ export const LoginForm = () => {
       email: '',
       password: ''
     },
-    onSubmit: ({ value }) => {
-      console.log(value)
+    onSubmit: async ({ value }) => {
+      await serverConnection.post(
+        '/login',
+        value,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then(resp => console.log(resp))
     }
   })
 
