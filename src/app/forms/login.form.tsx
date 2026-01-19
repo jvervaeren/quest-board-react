@@ -11,24 +11,18 @@ import {
 } from "@radix-ui/themes"
 import { useForm } from "@tanstack/react-form"
 import { signupRoute } from "../routes/signup.route"
-import { serverConnection } from "../connections/server.connection"
+import { useLogin } from "../hooks/useLogin.hook"
 
 export const LoginForm = () => {
+  const login = useLogin()
+
   const form = useForm({
     defaultValues: {
       email: '',
       password: ''
     },
-    onSubmit: async ({ value }) => {
-      await serverConnection.post(
-        '/login',
-        value,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      ).then(resp => console.log(resp))
+    onSubmit: async ({ value: formValues }) => {
+      await login(formValues)
     }
   })
 
